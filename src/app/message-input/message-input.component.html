@@ -1,0 +1,5 @@
+<div class="form-group">
+  <ng-content></ng-content>
+  <span class="help-block text-success" *ngIf="hasSuccess()">Ok</span>
+  <span class="help-block text-danger" *ngIf="hasError()">{{errorMessage}}</span>
+</div>
