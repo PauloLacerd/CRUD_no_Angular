@@ -22,4 +22,12 @@ export class FormService {
   postData(data: FormModel): Observable<FormModel>{
     return this.http.post<FormModel>(`${this.url_API}/data`, data).pipe(take(1))
   }
+
+  putData(data: FormModel): Observable<FormModel>{
+    return this.http.put<FormModel>(`${this.url_API}/data/${data.id}`, data).pipe(take(1))
+  }
+
+  deleteData(id: number): Observable<FormModel>{
+    return this.http.delete<FormModel>(`${this.url_API}/data/${id}`)
+  }
 }
