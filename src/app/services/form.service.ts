@@ -28,6 +28,6 @@ export class FormService {
   }
 
   deleteData(id: number): Observable<FormModel>{
-    return this.http.delete<FormModel>(`${this.url_API}/data/${id}`)
+    return this.http.delete<FormModel>(`${this.url_API}/data/${id}`).pipe(take(1))
   }
 }

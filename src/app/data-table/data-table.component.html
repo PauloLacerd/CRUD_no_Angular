@@ -1,4 +1,4 @@
-<table class="table table-hover table-secondary text-center">
+<table class="table table-hover table-secondary text-center mb-5">
   <thead>
     <tr>
       <th scope="col">Id</th>
@@ -8,13 +8,69 @@
     </tr>
   </thead>
   <tbody>
-    <tr *ngFor="let data of formData">
+    <tr *ngFor="let data of dataTable">
       <th scope="row">{{data.id}}</th>
       <td>{{data.name}}</td>
       <td>{{data.secondName}}</td>
       <td>{{data.email}}</td>
-      <td><button type="button" class="btn btn-warning">Alterar</button></td>
-      <td><button type="button" class="btn btn-danger">Deletar</button></td>
+      <td><button (click)="getDataTable(data)" type="button" class="btn btn-warning">Alterar</button></td>
+      <td><button (click)="deleteData(data.id)" type="button" class="btn btn-danger">Deletar</button></td>
     </tr>
   </tbody>
 </table>
+
+<hr class="border-1 border-info" />
+
+<form [formGroup]="formGroup" class="mt-5" [hidden]="!formData">
+
+  <div class="row">
+
+    <div class="col-sm-12 col-md-6">
+      <div class="form-group">
+        <label for="idName">Name</label>
+        <cra-message-input errorMessage="Inserir nome para autalizar os dados.">
+          <input [value]="formData?.name" type="text" class="form-control" formControlName="name" id="idName" autocomplete="off" />
+        </cra-message-input>
+      </div>
+    </div>
+
+    <div class="col-sm-12 col-md-6">
+      <div class="form-group">
+        <label for="idSecondName">Second Name</label>
+        <cra-message-input errorMessage="Inserir o sobrenome para atualizar os dados.">
+          <input [value]="formData?.secondName" type="text" class="form-control" formControlName="secondName" id="idSecondName" autocomplete="off" />
+        </cra-message-input>
+      </div>
+    </div>
+
+  </div>
+
+  <div class="row">
+
+    <div class="col-sm-12 col-md-6">
+      <div class="form-group">
+        <label for="idEmail">Email</label>
+        <cra-message-input errorMessage="Inserir o email para atualizar os dados.">
+          <input [value]="formData?.email" type="email" class="form-control" formControlName="email" id="idEmail" autocomplete="off" />
+        </cra-message-input>
+      </div>
+    </div>
+
+    <div class="col-sm-12 col-md-6">
+      <div class="form-group">
+        <label for="idPassword">Password</label>
+        <cra-message-input errorMessage="Inserir senha para alterar os dados.">
+          <input [value]="formData?.password" type="password" class="form-control" formControlName="password" id="idPassword" />
+        </cra-message-input>
+      </div>
+    </div>
+
+  </div>
+
+  <div class="row">
+    <div class="col-lg-12">
+      <button (click)="updateData()" type="submit" class="btn btn-warning btn-lg">Atualizar dados</button>
+    </div>
+  </div>
+
+</form>
