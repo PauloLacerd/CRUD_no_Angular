@@ -19,6 +19,10 @@ export class FormService {
     return this.http.get<FormModel[]>(`${this.url_API}/data`)
   }
 
+  getDataForId(id: number): Observable<FormModel>{
+    return this.http.get<FormModel>(`${this.url_API}/data/${id}`)
+  }
+
   postData(data: FormModel): Observable<FormModel>{
     return this.http.post<FormModel>(`${this.url_API}/data`, data).pipe(take(1))
   }

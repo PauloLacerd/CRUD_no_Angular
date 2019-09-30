@@ -39,27 +39,28 @@ export class DataTableComponent implements OnInit {
                                          error => console.error('Erro ao retornar os dados do banco. ' + error))
   }
 
-  getDataTable(data: FormModel){
-    this.formData = data
+  setFormValue(){
+    this.formGroup.get('name').setValue(this.formData.name)
+    this.formGroup.get('secondName').setValue(this.formData.secondName)
+    this.formGroup.get('email').setValue(this.formData.email)
+    this.formGroup.get('password').setValue(this.formData.password)
   }
 
-  updateVariable(){
-    this.formData = {name: this.formGroup.get('name').value,
-                     secondName: this.formGroup.get('secondName').value,
-                     email: this.formGroup.get('email').value,
-                     password: this.formGroup.get('password').value,
-                     id: this.formData.id}
+  getDataTable(id: number){
+    this.formService.getDataForId(id).subscribe(success => [this.formData = success, console.log(this.formData)], error => console.error('Erro'))
+    this.setFormValue()
   }
 
   updateData(){
-    this.updateVariable()
-    this.formService.putData(this.formData).subscribe(success => console.log('Dados atualizado com sucesso !!!'),
-    error => console.error('Falha ao atualizar os dados: ' + error))
+    console.log(this.formData)
+    console.log(this.formGroup.value)
+    //this.formService.putData(this.formData).subscribe(success => console.log('Dados atualizado com sucesso !!!'),
+    //error => console.error('Falha ao atualizar os dados: ' + error))
   }
 
   deleteData(id: number){
     this.formService.deleteData(id).subscribe(success => console.log('Dado apagado com sucesso !!!'),
-                                            error => console.error('Falha ao apagar os dados: ' + error))
+                                              error => console.error('Falha ao apagar os dados: ' + error))
     location.reload()
   }
 
