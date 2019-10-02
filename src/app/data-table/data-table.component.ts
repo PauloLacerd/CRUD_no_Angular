@@ -59,7 +59,8 @@ export class DataTableComponent implements OnInit {
   }
 
   getDataTable(id: number){
-    this.formService.getDataForId(id).subscribe(success => [this.formData = success, this.setFormValue()], error => console.error('Erro'))
+    this.formService.getDataForId(id).subscribe(success => [this.formData = success,
+      this.setFormValue()], error => console.error('Erro'))
   }
 
   updateData(){
