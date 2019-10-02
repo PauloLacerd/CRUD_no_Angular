@@ -28,7 +28,7 @@ export class DataTableComponent implements OnInit {
   initForm(){
     this.formGroup = this.formBuilder.group({
       name: this.formBuilder.control('', Validators.required),
-      email: this.formBuilder.control('', [Validators.required, Validators.pattern(/^[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,4}$/)]),
+      email: this.formBuilder.control('', [Validators.required, Validators.pattern(/^[A-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,4}$/)]),
       password: this.formBuilder.control('', Validators.required),
       secondName: this.formBuilder.control('', Validators.required)
     })
@@ -39,6 +39,10 @@ export class DataTableComponent implements OnInit {
                                          error => console.error('Erro ao retornar os dados do banco. ' + error))
   }
 
+  cancelUpdate(){
+    this.formData = undefined
+  }
+
   setFormValue(){
     this.formGroup.get('name').setValue(this.formData.name)
     this.formGroup.get('secondName').setValue(this.formData.secondName)
@@ -46,22 +50,28 @@ export class DataTableComponent implements OnInit {
     this.formGroup.get('password').setValue(this.formData.password)
   }
 
+  getFormValue(){
+    this.formData = {name: this.formGroup.get('name').value,
+                     secondName: this.formGroup.get('secondName').value,
+                     email: this.formGroup.get('email').value,
+                     password: this.formGroup.get('password').value,
+                     id: this.formData.id}
+  }
+
   getDataTable(id: number){
-    this.formService.getDataForId(id).subscribe(success => [this.formData = success, console.log(this.formData)], error => console.error('Erro'))
-    this.setFormValue()
+    this.formService.getDataForId(id).subscribe(success => [this.formData = success, this.setFormValue()], error => console.error('Erro'))
   }
 
   updateData(){
-    console.log(this.formData)
-    console.log(this.formGroup.value)
-    //this.formService.putData(this.formData).subscribe(success => console.log('Dados atualizado com sucesso !!!'),
-    //error => console.error('Falha ao atualizar os dados: ' + error))
+    this.getFormValue()
+    this.formService.putData(this.formData).subscribe(success => [console.log('Dados atualizado com sucesso !!!'), this.get()],
+    error => console.error('Falha ao atualizar os dados: ' + error))
+    this.formData = undefined
   }
 
   deleteData(id: number){
-    this.formService.deleteData(id).subscribe(success => console.log('Dado apagado com sucesso !!!'),
+    this.formService.deleteData(id).subscribe(success => [console.log('Dado apagado com sucesso !!!'), this.get()],
                                               error => console.error('Falha ao apagar os dados: ' + error))
-    location.reload()
   }
 
 }
