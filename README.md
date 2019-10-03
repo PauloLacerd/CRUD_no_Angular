@@ -3,6 +3,11 @@
 O projeto tem como gunção colocar em prática os conhecimentos adquiridos com o curso de Angular.
 Foi criado um CRUD básico usando Angular e Bootstrap.
 
+Para simular uma API Rest basta usar o comando 'json-server db.json', e em seguida usar o comando 'ng serve'
+para ver a aplicação em funcionamento.
+
+OBS: Para usar o comando 'json-server' é necessário instalá-lo com o npm(Gerenciador de Pacotes do Node).
+
 # 
 
 This project was generated with [Angular CLI](https://github.com/angular/angular-cli) version 8.3.2.
