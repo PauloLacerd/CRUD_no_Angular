@@ -1,5 +1,10 @@
 # CRUD utilizando Angular
 
+O projeto tem como gunção colocar em prática os conhecimentos adquiridos com o curso de Angular.
+Foi criado um CRUD básico usando Angular e Bootstrap.
+
+# 
+
 This project was generated with [Angular CLI](https://github.com/angular/angular-cli) version 8.3.2.
 
 ## Development server
